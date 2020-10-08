@@ -1,7 +1,29 @@
-"""A Markov chain generator that can tweet random messages."""
+
 
 import sys
 from random import choice
+
+import os
+import discord
+
+client = discord.Client()
+
+@client.event
+async def on_ready():
+    print(f'Successfully connected! Logged in as {client.user}.')
+
+
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+    if message.content.startswith("Hello"):  
+    #TextChannel.name = "discord-lab-testing":
+        await message.channel.send(randomtext)
+    
+
+"""A Markov chain generator that can tweet random messages."""
+
 
 
 def open_and_read_file(filenames):
@@ -42,11 +64,11 @@ def make_text(chains):
 
     words = [key[0], key[1]]
     while key in chains:
-        # Keep looping until we have a key that isn't in the chains
-        # (which would mean it was the end of our original text).
+    # Keep looping until we have a key that isn't in the chains
+    # (which would mean it was the end of our original text).
 
-        # Note that for long texts (like a full book), this might mean
-        # it would run for a very long time.
+    # Note that for long texts (like a full book), this might mean
+    # it would run for a very long time.
 
         word = choice(chains[key])
         words.append(word)
@@ -64,3 +86,10 @@ text = open_and_read_file(filenames)
 
 # Get a Markov chain
 chains = make_chains(text)
+
+randomtext = make_text(chains)
+
+
+    
+
+client.run(os.environ['DISCORD_TOKEN'])
