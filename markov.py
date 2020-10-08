@@ -18,9 +18,12 @@ async def on_message(message):
     if message.author == client.user:
         return
     if message.content.startswith("Hello"):  
-    #TextChannel.name = "discord-lab-testing":
         await message.channel.send(randomtext)
+
     
+
+
+
 
 """A Markov chain generator that can tweet random messages."""
 
